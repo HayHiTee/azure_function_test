@@ -10,6 +10,12 @@ resources:
 
 variables:
   tag: '$(Build.BuildId)'
+# Azure service connection established during pipeline creation
+  azureSubscription: 'Pay-As-You-Go'
+  appName: mat-function-app
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
 
 stages:
 - stage: Build
@@ -27,3 +33,13 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
           $(tag)
+
+
+
+
+    - task: AzureFunctionApp@1 
+      inputs:
+        azureSubscription: 'Pay-As-You-Go'
+        appType: functionAppLinux
+        appName: $(mat-function-app)
+        package: $(System.ArtifactsDirectory)/**/*.zip
