@@ -5,9 +5,7 @@ COPY . /email_processing/
 WORKDIR /email_processing/
 
 # Install python packages
-RUN pip install azure.storage.blob
-RUN pip install PyPDF2
-RUN pip install pathlib
+RUN pip install -r requirements.txt
 
 # Set "python" as the entry point
 ENTRYPOINT ["python"]

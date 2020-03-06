@@ -8,7 +8,7 @@ def upload_file_to_storage(file_to_upload, connection_string, container_name):
     blob_client = blob_service_client.get_blob_client(container=container_name, blob=file_to_upload)
 
     with open(file_to_upload, "rb") as data:
-        blob_client.upload_blob(data)
+        blob_client.upload_blob(data, overwrite=True)
 
 
 
